@@ -20,6 +20,7 @@ class RubberBottomSheet extends StatefulWidget {
       this.menuLayer,
       this.scrollController,
       this.header,
+      this.upperLayerMargin,
       this.headerHeight = 50.0,
       this.dragFriction = 0.52,
       this.onDragStart,
@@ -31,6 +32,8 @@ class RubberBottomSheet extends StatefulWidget {
   final Widget lowerLayer;
   final Widget upperLayer;
   final Widget? menuLayer;
+
+  final EdgeInsets? upperLayerMargin;
 
   /// Friction to apply when the sheet reaches its bounds.
   /// The higher the number, the more friction is applied.
@@ -183,9 +186,11 @@ class RubberBottomSheetState extends State<RubberBottomSheet>
     var bottomSheet = Stack(children: <Widget>[
       peak,
       Container(
-          margin: EdgeInsets.only(
-              top: widget.header != null ? widget.headerHeight : 0),
-          child: widget.upperLayer)
+        margin: widget.upperLayerMargin != null
+          ? EdgeInsets.only(top: widget.header != null ? widget.headerHeight : 0).add(widget.upperLayerMargin!)
+          : EdgeInsets.only(top: widget.header != null ? widget.headerHeight : 0),
+        child: widget.upperLayer
+      )
     ]);
     var elem;
     if (_display) {
