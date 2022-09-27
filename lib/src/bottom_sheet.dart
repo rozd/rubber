@@ -385,9 +385,7 @@ class RubberBottomSheetState extends State<RubberBottomSheet>
 
   @override
   void afterFirstLayout(BuildContext context) {
-    setState(() {
-      controller.height = _bottomSheetHeight;
-    });
+    controller.height = _bottomSheetHeight;
   }
 
   bool _draggingPeak(Offset? globalPosition) {
